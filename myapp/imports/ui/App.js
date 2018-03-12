@@ -1,7 +1,13 @@
+import gql from 'graphql-tag';
+import { graphql } from 'react-apollo';
 import React from 'react';
 
-const App = () => (
-    <h1>Hello World</h1>
-);
+const App = ({ data }) => <h1>{data.hi}</h1>;
 
-export default App;
+const hiQuery = gql`
+    {
+        hi
+    }
+`;
+
+export default graphql(hiQuery)(App);
