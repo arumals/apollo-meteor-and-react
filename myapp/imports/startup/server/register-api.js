@@ -4,7 +4,7 @@ import { makeExecutableSchema } from 'graphql-tools';
 import merge from 'lodash/merge';
 
 // schema
-import ResolutionsSchema from './../../api/resolutions/Resolutions.graphql';
+import ResolutionsSchema from './../../api/resolutions/schema';
 import ResolutionsResolvers from './../../api/resolutions/resolvers';
 
 const testSchema = `
