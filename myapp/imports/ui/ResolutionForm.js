@@ -26,8 +26,18 @@ class Resolution extends Component {
   render(){
     return (
       <div>
-        <input ref={input => (this.name = input)} onClick={this.props.onCancelUpdate} />
-        <button onClick={this.submitForm}>Submit</button>
+        <table>
+          <tbody>
+            <tr>
+              <td>Name:</td>
+              <td><input ref={input => (this.name = input)} onClick={this.props.onCancelUpdate} /></td>
+            </tr>
+            <tr>
+              <td>&nbsp;</td>
+              <td><button onClick={this.submitForm}>Submit</button></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     )
   }
