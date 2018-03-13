@@ -33,4 +33,11 @@ class Resolution extends Component {
   }
 }
 
-export default graphql(createResolution, { name: 'createResolution' })(Resolution);
+export default graphql(createResolution, { 
+  name: 'createResolution',
+  options: {
+    refetchQueries: [
+      'Resolutions'
+    ]
+  }
+})(Resolution);

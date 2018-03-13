@@ -59,6 +59,6 @@ class EditResolutionForm extends Component {
 }
 
 export default compose(
-  graphql(updateResolution,{ name: 'updateResolution' }),
-  graphql(removeResolution,{ name: 'removeResolution' })
+  graphql(updateResolution, { name: 'updateResolution', options: { refetchQueries: ['Resolutions'] } }),
+  graphql(removeResolution, { name: 'removeResolution', options: { refetchQueries: ['Resolutions'] } })
 )(EditResolutionForm);
