@@ -7,4 +7,4 @@
 5. [GraphQL Schemas](notes/005.md).
 6. [Object Queries](notes/006.md).
 7. [Organizing Resolvers](notes/007.md).
-9. [Using a Collection Database](notes/008.md).
+8. [Using a Collection Database](notes/008.md).
