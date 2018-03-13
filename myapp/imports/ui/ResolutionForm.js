@@ -16,16 +16,17 @@ class Resolution extends Component {
       variables: {
         name: this.name.value
       }
-    }).then(val => {
-      this.props.refetch();
+    }).then(res => {
+      this.props.onSaved(res);
     }).catch(err => {
-      console.error(err);
-    })
+      alert(err.message);
+    });
+    this.name.value = '';
   }
   render(){
     return (
       <div>
-        <input ref={input => (this.name = input)} />
+        <input ref={input => (this.name = input)} onClick={this.props.onCancelUpdate} />
         <button onClick={this.submitForm}>Submit</button>
       </div>
     )

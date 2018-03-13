@@ -12,5 +12,7 @@ export default gql`
 
   type Mutation {
     createResolution(name: String!): Resolution
+    updateResolution(id: String!, name: String!): Resolution
+    removeResolution(id: String!): Resolution
   }
 `;
