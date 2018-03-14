@@ -2,7 +2,8 @@ import Resolutions from './resolutions';
 
 export default {
   Query: {
-    resolutions(){
+    resolutions(obj, args, context){
+      console.log(context);
       return Resolutions.find({},{ sort: { name: 1 }}).fetch();
     }
   },
