@@ -7,7 +7,10 @@ class LoginForm extends Component {
     Meteor.loginWithPassword(
       this.email.value, 
       this.password.value, 
-      err => alert(!err ? 'Authenticated!' : err.message)
+      err => {
+        if(err) return alert(err.message);
+        this.props.client.resetStore();
+      }
     );
     this.email.value = this.password.value = "";
   }

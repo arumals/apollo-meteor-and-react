@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-import { graphql } from 'react-apollo';
+import { graphql, withApollo } from 'react-apollo';
 import React, { Component } from 'react';
 import ResolutionForm from './ResolutionForm';
 import EditResolution from './EditResolutionForm';
@@ -25,9 +25,13 @@ class App extends Component {
     onCancelUpdate = () => {
         this.setState({ editing: '' });
     }
+    onClickLogout = () => {
+        Meteor.logout();
+        this.props.client.resetStore();
+    }
     render(){
         // extract values
-        const { loading, resolutions } = this.props;
+        const { loading, resolutions, client } = this.props;
         // when loading
         if(loading){ 
             return <div>Loading...</div>;
@@ -36,20 +40,29 @@ class App extends Component {
         return ( // when loaded
             <div>
                 <h1>Resolutions</h1>
-                <RegisterForm />
-                <LoginForm />
-                <ResolutionForm onSaved={this.onSaved} onCancelUpdate={this.onCancelUpdate} />
-                <ul>{resolutions.map(({ _id, name }) => (
-                    <li key={_id}>
-                        {this.state.editing != _id ? 
-                            <a href="/" onClick={e => this.onEnableEdition(e,_id)}>{name || '...'}</a> :
-                            <EditResolution
-                                {...{_id, name}}
-                                onUpdated={this.onUpdated}
-                                onCancelUpdate={this.onCancelUpdate} 
-                            />}
-                    </li>
-                ))}</ul>
+                {Meteor.userId() ? (
+                    <div className="authenticated">
+                        <button onClick={this.onClickLogout}>Logout</button><br />
+                        <br />
+                        <ResolutionForm onSaved={this.onSaved} onCancelUpdate={this.onCancelUpdate} />
+                        <ul>{resolutions.map(({ _id, name }) => (
+                            <li key={_id}>
+                                {this.state.editing != _id ? 
+                                    <a href="/" onClick={e => this.onEnableEdition(e,_id)}>{name || '...'}</a> :
+                                    <EditResolution
+                                        {...{_id, name}}
+                                        onUpdated={this.onUpdated}
+                                        onCancelUpdate={this.onCancelUpdate} 
+                                    />}
+                            </li>
+                        ))}</ul>
+                    </div>
+                ) : (
+                    <div className="guest">
+                        <RegisterForm client={client} />
+                        <LoginForm client={client} />
+                    </div>
+                ) } 
             </div>
         )
     }
@@ -66,4 +79,4 @@ const resolutionsQuery = gql`
 
 export default graphql(resolutionsQuery, {
     props: ({ data }) => ({ ...data })
-})(App);
+})(withApollo(App));

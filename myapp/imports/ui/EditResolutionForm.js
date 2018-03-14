@@ -19,12 +19,16 @@ const removeResolution = gql`
 `;
 
 class EditResolutionForm extends Component {
-  onClickSave = () => {
-    if(!this.name.value) return this.props.onCancelUpdate();
+  componentDidMount(){
+    this.name.focus();
+  }
+  onSubmit = (e) => {
+    e.preventDefault();
+    if(this.name.value.trim().length == 0) return this.onClickCancel();
     this.props.updateResolution({
       variables: { 
         id: this.props._id, 
-        name: this.name.value,
+        name: this.name.value.trim(),
       }
     }).then(res => {
       this.props.onUpdated();
@@ -49,10 +53,12 @@ class EditResolutionForm extends Component {
   render(){
     return (
       <div className="edit-form">
-        <input ref={input => (this.name = input)} placeholder={this.props.name} />
-        <button onClick={this.onClickSave}>Save</button>
-        <button onClick={this.onClickCancel}>Cancel</button>
-        <button onClick={this.onClickRemove}>Remove</button>
+        <form onSubmit={this.onSubmit}>
+          <input ref={input => (this.name = input)} placeholder={this.props.name} />
+          <button type="submit">Save</button>
+          <button type="button" onClick={this.onClickCancel}>Cancel</button>
+          <button type="button" onClick={this.onClickRemove}>Remove</button>
+        </form>
       </div>
     )
   }

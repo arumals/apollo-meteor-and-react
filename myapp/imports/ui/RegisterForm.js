@@ -7,7 +7,10 @@ class RegisterForm extends Component {
     Accounts.createUser({
       email: this.email.value,
       password: this.password.value,
-    }, err => alert(!err ? 'Registered' : err.message));
+    }, err => {
+      if(err) return alert(err.message);
+      this.props.client.resetStore();
+    });
     this.email.value = this.password.value = "";
   }
   render(){

@@ -3,13 +3,12 @@ import Resolutions from './resolutions';
 export default {
   Query: {
     resolutions(obj, args, context){
-      console.log(context);
-      return Resolutions.find({},{ sort: { name: 1 }}).fetch();
+      return Resolutions.find({ userId: context.userId },{ sort: { name: 1 }}).fetch();
     }
   },
   Mutation: {
     createResolution(obj, args, context){ // args contains the arguments sent to the mutation
-      const resolutionId = Resolutions.insert({ name: args.name });
+      const resolutionId = Resolutions.insert({ name: args.name, userId: context.userId });
       return Resolutions.findOne(resolutionId);
     },
     updateResolution(obj, args, context){

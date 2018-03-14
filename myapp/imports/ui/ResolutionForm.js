@@ -11,33 +11,27 @@ const createResolution = gql`
 `;
 
 class Resolution extends Component {
-  submitForm = () => {
+  submitForm = (e) => {
+    e.preventDefault();
+    if(this.name.value.trim().length == 0) return;
     this.props.createResolution({
       variables: {
-        name: this.name.value
+        name: this.name.value.trim()
       }
     }).then(res => {
       this.props.onSaved(res);
+      this.name.value = '';
     }).catch(err => {
       alert(err.message);
     });
-    this.name.value = '';
   }
   render(){
     return (
       <div>
-        <table>
-          <tbody>
-            <tr>
-              <td>Name:</td>
-              <td><input ref={input => (this.name = input)} onClick={this.props.onCancelUpdate} /></td>
-            </tr>
-            <tr>
-              <td>&nbsp;</td>
-              <td><button onClick={this.submitForm}>Submit</button></td>
-            </tr>
-          </tbody>
-        </table>
+        <form onSubmit={this.submitForm}>
+          <input ref={input => (this.name = input)} onClick={this.props.onCancelUpdate} /> 
+          <button type="submit">Add</button>
+        </form>
       </div>
     )
   }

@@ -12,3 +12,4 @@
 10. [Auto Refetching and Query Prop Assignment](notes/010.md).
 11. [Basic Meteor Account System](notes/011.md).
 12. [Connecting Meteor to Apollo](notes/012.md).
+13. [User inserts and client reset store](notes/013.md).
