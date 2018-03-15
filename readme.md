@@ -13,3 +13,4 @@
 11. [Basic Meteor Account System](notes/011.md).
 12. [Connecting Meteor to Apollo](notes/012.md).
 13. [User inserts and client reset store](notes/013.md).
+14. [User schema and query](notes/014.md).
