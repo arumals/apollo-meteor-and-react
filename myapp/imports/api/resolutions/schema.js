@@ -5,6 +5,9 @@ export default gql`
     _id: String!
     name: String!
   }
+  type Query {
+    resolutions: [Resolution]
+  }
   type Mutation {
     createResolution(name: String!): Resolution
     updateResolution(id: String!, name: String!): Resolution

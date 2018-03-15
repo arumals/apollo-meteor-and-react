@@ -5,4 +5,7 @@ export default gql`
     _id: String
     email: String
   }
+  extend type Query {
+    user: User
+  }
 `;
