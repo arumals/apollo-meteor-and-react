@@ -15,3 +15,4 @@
 13. [User inserts and client reset store](notes/013.md).
 14. [User schema and query](notes/014.md).
 15. [Extending schema types](notes/015.md).
+16. [Custom resolvers](notes/016.md).
