@@ -1,10 +1,14 @@
 import Resolutions from './resolutions';
+import Goals from './../goals/collection';
 
 export default {
   Query: {
     resolutions(obj, args, context){
       return Resolutions.find({ userId: context.userId },{ sort: { name: 1 }}).fetch();
     }
+  },
+  Resolution: {
+    goals: (resolution) => Goals.find({ resolutionId: resolution._id }).fetch(),
   },
   Mutation: {
     createResolution(obj, args, context){ // args contains the arguments sent to the mutation

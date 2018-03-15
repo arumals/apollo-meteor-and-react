@@ -27,21 +27,19 @@ class Resolution extends Component {
   }
   render(){
     return (
-      <div>
-        <form onSubmit={this.submitForm}>
-          <input ref={input => (this.name = input)} onClick={this.props.onCancelUpdate} /> 
-          <button type="submit">Add</button>
-        </form>
-      </div>
+      <form onSubmit={this.submitForm}>
+        <div className="input-group">
+          <input ref={input => (this.name = input)} onClick={this.props.onCancelUpdate} className="form-control" /> 
+          <div className="input-group-btn">
+            <button type="submit" className="btn btn-primary">Add</button>
+          </div>
+        </div>
+      </form>
     )
   }
 }
 
 export default graphql(createResolution, { 
   name: 'createResolution',
-  options: {
-    refetchQueries: [
-      'Resolutions'
-    ]
-  }
+  options: { refetchQueries: [ 'Resolutions' ] }
 })(Resolution);

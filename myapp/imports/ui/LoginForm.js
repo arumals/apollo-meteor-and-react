@@ -16,17 +16,22 @@ class LoginForm extends Component {
   }
   render(){
     return (
-      <form onSubmit={this.loginUser}>
-        <h2>Login</h2>
-        <table>
-          <tbody>
-            <tr><td>Email:</td><td><input type="email" ref={input => (this.email = input)} /></td></tr>
-            <tr><td>Password:</td><td><input type="password" ref={input => (this.password = input)} /></td></tr>
-            <tr><td>&nbsp;</td><td><button type="submit">Login</button></td></tr>
-          </tbody>
-        </table>
-        <br />
-      </form>
+      <div className="row">
+        <form onSubmit={this.loginUser}>
+          <h2>Login</h2>
+          <div className="form-group">
+            <label htmlFor="emal" className="label-control">Email:</label>
+            <input type="email" ref={input => (this.email = input)} className="form-control" />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password" className="label-control">Password</label>
+            <input type="password" ref={input => (this.password = input)} className="form-control" />
+          </div>
+          <div className="form-group">
+            <button type="submit" className="btn btn-primary">Login</button>
+          </div>
+        </form>
+      </div>
     )
   }
 }

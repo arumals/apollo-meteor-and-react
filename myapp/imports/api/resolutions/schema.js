@@ -4,6 +4,7 @@ export default gql`
   type Resolution {
     _id: String!
     name: String!
+    goals: [Goal]
   }
   type Query {
     resolutions: [Resolution]

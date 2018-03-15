@@ -11,11 +11,13 @@ import ResolutionsResolvers from './../../api/resolutions/resolvers';
 import UsersSchema from './../../api/users/schema';
 import UsersResolvers from './../../api/users/resolvers';
 
-// resolutions array
-const typeDefs = [ ResolutionsSchema, UsersSchema];
-const resolvers = merge(ResolutionsResolvers, UsersResolvers);
+// goals
+import GoalSchema from './../../api/goals/schema';
+import GoalResolvers from './../../api/goals/resolvers';
 
-// generate the schema
+// prepare schema
+const typeDefs = [ ResolutionsSchema, UsersSchema, GoalSchema];
+const resolvers = merge(ResolutionsResolvers, UsersResolvers, GoalResolvers);
 const schema = makeExecutableSchema({ typeDefs, resolvers });
 
 // create the server

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import gql from 'graphql-tag';
 import { graphql, compose } from 'react-apollo';
+import GoalForm from './GoalForm';
 
 const updateResolution = gql`
   mutation updateResolution($id: String!, $name: String!){
@@ -27,7 +28,7 @@ class EditResolutionForm extends Component {
     if(this.name.value.trim().length == 0) return this.onClickCancel();
     this.props.updateResolution({
       variables: { 
-        id: this.props._id, 
+        id: this.props.resolutionId, 
         name: this.name.value.trim(),
       }
     }).then(res => {
@@ -42,7 +43,7 @@ class EditResolutionForm extends Component {
   onClickRemove = () => {
     this.props.removeResolution({ 
       variables: { 
-        id: this.props._id 
+        id: this.props.resolutionId 
       } 
     }).then(res => {
       this.props.onUpdated();
@@ -52,13 +53,22 @@ class EditResolutionForm extends Component {
   }
   render(){
     return (
-      <div className="edit-form">
-        <form onSubmit={this.onSubmit}>
-          <input ref={input => (this.name = input)} placeholder={this.props.name} />
-          <button type="submit">Save</button>
-          <button type="button" onClick={this.onClickCancel}>Cancel</button>
-          <button type="button" onClick={this.onClickRemove}>Remove</button>
-        </form>
+      <div className="row">
+        <div className="col-xs-12 col-md-8">
+          <form onSubmit={this.onSubmit} style={{marginBottom:'5px'}}>
+            <div className="input-group">
+              <input ref={input => (this.name = input)} placeholder={this.props.name} className="form-control" />
+              <div className="input-group-btn">
+                <button type="submit" className="btn btn-default">Save</button>
+                <button type="button" onClick={this.onClickCancel} className="btn btn-default">Cancel</button>
+                <button type="button" onClick={this.onClickRemove} className="btn btn-default">Remove</button>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div className="col-xs-12 col-md-4">
+          <GoalForm resolutionId={this.props.resolutionId} />
+        </div>
       </div>
     )
   }

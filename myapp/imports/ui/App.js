@@ -11,10 +11,9 @@ class App extends Component {
         super(props);
         this.state = { editing: '' };
     }
-    onEnableEdition = (e, id) => {
+    onEnableEdition = (e, id) => { 
         e.preventDefault();
         this.setState({ editing: id });
-        console.log(e.target);
     }
     onSaved = () => {
         // this.props.data.refetch();
@@ -38,29 +37,41 @@ class App extends Component {
         }
         // if editing show the edit form
         return ( // when loaded
-            <div>
+            <div className="container">                
                 <h1>Resolutions</h1>
                 {user._id ? (
                     <div className="authenticated">
-                        <button onClick={this.onClickLogout}>Logout</button><br />
+                        <button onClick={this.onClickLogout} className="btn btn-default">Logout</button><br />
                         <br />
-                        <ResolutionForm onSaved={this.onSaved} onCancelUpdate={this.onCancelUpdate} />
-                        <ul>{resolutions.map(({ _id, name }) => (
-                            <li key={_id}>
-                                {this.state.editing != _id ? 
-                                    <a href="/" onClick={e => this.onEnableEdition(e,_id)}>{name || '...'}</a> :
-                                    <EditResolution
-                                        {...{_id, name}}
-                                        onUpdated={this.onUpdated}
-                                        onCancelUpdate={this.onCancelUpdate} 
-                                    />}
-                            </li>
-                        ))}</ul>
+                        <div className="row">
+                            <div className="col-xs-12 col-sm-6 col-md-3">
+                                <ResolutionForm onSaved={this.onSaved} onCancelUpdate={this.onCancelUpdate} />
+                            </div>
+                        </div>
+                        <hr />
+                        <div className="col-xs-12">
+                            <div className="row">
+                                <ul className="resolutions-list">{resolutions.map(({ _id, name }) => (
+                                    <li key={_id}>
+                                        {this.state.editing != _id ? 
+                                            <a href="/" onClick={e => this.onEnableEdition(e,_id)}>{name || '...'}</a> :
+                                            <EditResolution
+                                                resolutionId={_id}
+                                                name={name}
+                                                onUpdated={this.onUpdated}
+                                                onCancelUpdate={this.onCancelUpdate} 
+                                            />}
+                                    </li>
+                                ))}</ul>
+                            </div>
+                        </div>
                     </div>
                 ) : (
                     <div className="guest">
-                        <RegisterForm client={client} />
-                        <LoginForm client={client} />
+                        <div className="col-xs-12 col-sm-9 col-md-6 col-lg-4">
+                            <RegisterForm client={client} />
+                            <LoginForm client={client} />
+                        </div>
                     </div>
                 ) } 
             </div>

@@ -16,3 +16,4 @@
 14. [User schema and query](notes/014.md).
 15. [Extending schema types](notes/015.md).
 16. [Custom resolvers](notes/016.md).
+17. [Goals Schema](notes/017.md).
