@@ -5,6 +5,7 @@ import ResolutionForm from './ResolutionForm';
 import EditResolution from './EditResolutionForm';
 import RegisterForm from './RegisterForm';
 import LoginForm from './LoginForm';
+import Goal from './resolutions/Goal';
 
 class App extends Component {
     constructor(props){
@@ -51,16 +52,15 @@ class App extends Component {
                         <hr />
                         <div className="col-xs-12">
                             <div className="row">
-                                <ul className="resolutions-list">{resolutions.map(({ _id, name }) => (
+                                <ul className="resolutions-list">{resolutions.map(({ _id, name, goals }) => (
                                     <li key={_id}>
-                                        {this.state.editing != _id ? 
-                                            <a href="/" onClick={e => this.onEnableEdition(e,_id)}>{name || '...'}</a> :
-                                            <EditResolution
-                                                resolutionId={_id}
-                                                name={name}
-                                                onUpdated={this.onUpdated}
-                                                onCancelUpdate={this.onCancelUpdate} 
-                                            />}
+                                        {this.state.editing != _id ? (
+                                            <a href="/" onClick={e => this.onEnableEdition(e,_id)}>{name || '...'}</a>
+                                        ) : (
+                                            <EditResolution resolutionId={_id} name={name} onUpdated={this.onUpdated} 
+                                                onCancelUpdate={this.onCancelUpdate} />
+                                        )}
+                                        {goals.map(goal => <Goal {...goal} key={goal._id} />)}
                                     </li>
                                 ))}</ul>
                             </div>
@@ -84,6 +84,10 @@ const resolutionsQuery = gql`
         resolutions {
             _id
             name
+            goals {
+                _id
+                name
+            }
         }
         user {
             _id
