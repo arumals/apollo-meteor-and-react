@@ -18,3 +18,4 @@
 16. [Custom resolvers](notes/016.md).
 17. [Goals Schema](notes/017.md).
 18. [Relational Data Query](notes/018.md).
+19. [Writing a Toggle Mutation](notes/019.md).

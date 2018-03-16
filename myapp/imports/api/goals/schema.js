@@ -8,5 +8,6 @@ export default gql`
   }
   extend type Mutation {
     createGoal(name: String!, resolutionId: String!): Goal
+    toggleGoal(id: String): Goal
   }
 `;

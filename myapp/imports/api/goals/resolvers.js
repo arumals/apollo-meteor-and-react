@@ -9,6 +9,11 @@ export default {
         completed: false,
       });
       return Goals.findOne(goalId);
+    },
+    toggleGoal(obj, args, context){
+      const { completed } = Goals.findOne(args.id);
+      Goals.update(args.id, { $set : { completed: !completed } });
+      return Goals.findOne(args.id);
     }
   }
 }
