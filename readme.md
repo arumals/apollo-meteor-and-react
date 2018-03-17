@@ -20,3 +20,4 @@
 18. [Relational Data Query](notes/018.md).
 19. [Writing a Toggle Mutation](notes/019.md).
 20. [Custom Resolvers for Useful Data](notes/020.md).
+21. [Securing Our Mutations](notes/021.md).
