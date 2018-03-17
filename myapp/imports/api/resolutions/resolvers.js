@@ -9,7 +9,8 @@ export default {
   },
   Resolution: {
     goals: resolution => Goals.find({ resolutionId: resolution._id }).fetch(),
-    completed: resolution => Goals.find({ resolutionId: resolution._id, completed: false }).count() == 0,
+    completed: resolution => Goals.find({ resolutionId: resolution._id }).count() > 0 && 
+      Goals.find({ resolutionId: resolution._id, completed: false }).count() == 0,
   },
   Mutation: {
     createResolution(obj, args, context){ // args contains the arguments sent to the mutation
