@@ -52,10 +52,12 @@ class App extends Component {
                         <hr />
                         <div className="col-xs-12">
                             <div className="row">
-                                <ul className="resolutions-list">{resolutions.map(({ _id, name, goals }) => (
+                                <ul className="resolutions-list">{resolutions.map(({ _id, name, goals, completed }) => (
                                     <li key={_id}>
                                         {this.state.editing != _id ? (
-                                            <a href="/" onClick={e => this.onEnableEdition(e,_id)}>{name || '...'}</a>
+                                            <a href="/" onClick={e => this.onEnableEdition(e,_id)} style={{textDecoration:completed ? 'line-through' : 'none'}}>
+                                                {name || '...'}
+                                            </a>
                                         ) : (
                                             <EditResolution resolutionId={_id} name={name} onUpdated={this.onUpdated} 
                                                 onCancelUpdate={this.onCancelUpdate} />
@@ -84,9 +86,11 @@ const resolutionsQuery = gql`
         resolutions {
             _id
             name
+            completed
             goals {
                 _id
                 name
+                completed
             }
         }
         user {

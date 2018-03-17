@@ -21,7 +21,10 @@ class Goal extends Component {
   render(){
     return (
       <div className="checkbox">
-        <label><input type="checkbox" onChange={this.toggleGoal} /> {this.props.name}</label>
+        <label>
+          <input type="checkbox" checked={this.props.completed} onChange={this.toggleGoal} />
+          <span style={{textDecoration:this.props.completed ? 'line-through':'none'}}>{this.props.name}</span>
+        </label>
       </div>
     )
   }
@@ -30,6 +33,6 @@ class Goal extends Component {
 export default graphql(toggleGoal,{
   name: 'toggleGoal',
   options: {
-    refetch: ['Resolutions'],
+    refetchQueries: ['Resolutions'],
   }
 })(Goal);
